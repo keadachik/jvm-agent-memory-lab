@@ -1,0 +1,4 @@
+2026-09-03T08:05:13Z 実験開始。BASE_URL=http://localhost:8080 N_ROUTES=200 LOG_FILE=./logs/driver_main_stepd_20260903T080513Z.log
+2026-09-03T08:05:13Z === Step D 開始 (H_longtail検証: 一度も呼んでいない route 0 を初めて叩く) ===
+2026-09-03T08:05:14Z Step D: route 0 を1回叩いた。以後しばらく観察を続けること (数分〜十数分、遅延して段差が出るか確認)
+2026-09-03T08:05:14Z 実験終了。ログ: ./logs/driver_main_stepd_20260903T080513Z.log

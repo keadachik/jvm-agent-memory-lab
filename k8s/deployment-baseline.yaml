@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memlab-baseline
+  namespace: default
+  labels:
+    app: memlab-baseline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memlab-baseline
+  template:
+    metadata:
+      labels:
+        app: memlab-baseline
+      annotations:
+        # 対照群: この Pod だけエージェントの注入を除外する annotation を付ける。
+        # キーと値は使う APM 製品・オペレーターのドキュメントを参照。
+        # 除外できたかは `cat /proc/1/maps` などでエージェントのライブラリが無いことで確認する。
+        REPLACE_WITH_AGENT_EXCLUSION_ANNOTATION: "false"
+    spec:
+      containers:
+        - name: memlab
+          image: REPLACE_ME/memlab:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 200m
+              memory: 384Mi
+            limits:
+              cpu: 1000m
+              memory: 768Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: memlab-baseline
+  namespace: default
+spec:
+  selector:
+    app: memlab-baseline
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: ClusterIP

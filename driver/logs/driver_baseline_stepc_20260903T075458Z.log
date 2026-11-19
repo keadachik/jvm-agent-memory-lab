@@ -1,0 +1,4 @@
+2026-09-03T07:54:58Z 実験開始。BASE_URL=http://localhost:8081 N_ROUTES=200 LOG_FILE=./logs/driver_baseline_stepc_20260903T075458Z.log
+2026-09-03T07:54:58Z === Step C 開始 (全ルート既知の状態でRPSを100へ急増、H_loadの反証テスト) ===
+2026-09-03T07:59:58Z === Step C 完了 ===
+2026-09-03T07:59:58Z 実験終了。ログ: ./logs/driver_baseline_stepc_20260903T075458Z.log
